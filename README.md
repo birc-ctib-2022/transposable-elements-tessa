@@ -100,6 +100,57 @@ You are free to implement the genome classes however you want, and using whateer
 
 When you have implemented the two (or more) classes, describe the complexity of each operation as a function of the genome size (at the time of the operation), and the size of the TE involved (and when copying, the offset you are copying). Put the description here:
 
+
+
 **FIXME: OPERATION COMPLEXITY**
+
+length of the genome = n, 
+length of the transcriptional element you are workign with = t, 
+offset size = f, 
+number of active TEs= a 
+**Python List**
+
+***__init__***
+__init__'s complexity is O(n) because it has to run through all of self.genome which creates a list that is as long as the length of the genome, and the rest of the elements run in constant time 
+
+***insert_te***
+insert_te's complexity is O(n*t) because the most computationally demanding portion of this operation is in line 175 when the transcriptional element that is size t gets inserted into the genome that is the size n, and in doing so it has to push the rest of the genome down. In the worst case scenario, the TE would get inserted into the first index of the genome so the operation would have to run through the size of the transcriptional element and then the whole genome size to re-index every nucleotide, giving it a complexity of O(n*t)
+
+***copy_te***
+copy_te's complexity is also O(n*t) because the most computationally challenging portion of the operation is when it calls insert_te, which I think (as i said above) runs in O(n*t). the keys() method called on self.te has a complexity of O(a), which most likely  is going to be much smaller than the size of the genome and at worst case scenario would be the size of the genome so is not the portion of the operation that will be the most taxing. 
+
+***disable_te***
+disable_te's complexity is O(t) because the most computationally challenging porton of the operation is when it has to run through the length of the te (size =t) and convert the 'A's to 'x's in a for loop.
+
+***active_tes***
+active_tes's complexity is O(a), because it has to run through every element in the dictionary that is size a, the number of active transcriptional elements. 
+
+***__len__***
+__len__ runs in O(1) because it takes constant run time because built into the list object is a counter that keeps track of length of the list, so it does not depend on the size of the list. 
+
+***__str__***
+str runs in O(n) because its complexity is determined only by the size of the genome. 
+
+**Doubly-Linked-List Genome**
+***__init__***
+__init__'s complexity is O(n) because it has to run through all of self.genome which creates a list that is as long as the length of the genome, and the rest of the elements run in constant time 
+
+***insert_te***
+insert_te's complexity is O(n), because in the worst run time case scenario the operation has to run disable_te through the whole length of the genome, which runs in O(n), and the rest of compenents of the operation are not as complex as that and dont make it bigger. 
+
+***copy_te***
+Similarly to insert_te, copy_te's complexity is determined by insert_te, as it is the most compuationally challenging portion of the operation and it has a complexity of O(n), so that is the complexity of copy_te. 
+***disable_te***
+disable_te's comlexity is O(n), because its complexity is governed by the while loop that starts at index 0 (the beginning of the genome), and at worst case would run through the whole genome if the length of the te was the size of the whole genome, because the te could never be bigger than the genome as it is a part of it. 
+
+***active_tes***
+active_tes's complexity is O(a), because it has to run through every element in the dictionary that is size a, the number of active transcriptional elements. 
+
+***__len__***
+len for the DLL takes O(n) because it has to go through the while loop for every element in the genome to add it to the length variable. 
+
+***__str__***
+str has a complexity of O(n^2) because every time a new element of the genome is added to the string, it has to run through every element of the genome that has already been added to the string before the current element that is being added due to the += componenet. 
+
 
 In `src/simulate.py` you will find a program that can run simulations and tell you actual time it takes to simulate with different implementations. You can use it to test your analysis. You can modify the parameters to the simulator if you want to explore how they affect the running time.
