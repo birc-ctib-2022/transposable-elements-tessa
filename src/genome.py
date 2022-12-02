@@ -126,8 +126,8 @@ class ListGenome(Genome):
                                         # the keys in the dictionary in order of insertion using Python."
         for key in key_list:            #iterate through list
             start = self.te[key][0]     #make a new variable that is what key[0] in self.te dictionary corresponds to see line 120  
-            end = self.te[key][1]       #similar to above but end should be 1 see line 121
-            if start < pos < end:       # if the new te pos is in the range the previous te, the previous te must be inactivated 
+            end = start + self.te[key][1]       #similar to above but end should be 1 see line 121
+            if start < pos <= end:       # if the new te pos is in the range the previous te, the previous te must be inactivated 
                 for i in range(start, end):
                     self.genome[i] = 'x' #make te inactive (see line 83)
             del self.te[key]
@@ -159,9 +159,9 @@ class ListGenome(Genome):
         """
         ...  # FIXME
         if te in self.te.keys():
-            p= self.te[0] + offset % len(self)  # got help from Sara and Laura here 
-            l= self.te[1]
-            self.insert_te (p,1)
+            p= (self.te[te][0] + offset) % len(self)  # got help from Sara and Laura here 
+            l= self.te[te][1]
+            self.insert_te (p,l)
             return self.id
         else: 
             return None 
@@ -185,6 +185,7 @@ class ListGenome(Genome):
             del self.te[te]  #delete so that 
                              #if statement cause infinite loop and so we dont 
                              # #mess with the dictionary construction 
+        return None
 
 
     def active_tes(self) -> list[int]:
