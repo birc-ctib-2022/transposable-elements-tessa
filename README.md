@@ -132,6 +132,25 @@ __len__ runs in O(1) because it takes constant run time because built into the l
 str runs in O(n) because its complexity is determined only by the size of the genome. 
 
 **Doubly-Linked-List Genome**
+***__init__***
+__init__'s complexity is O(n) because it has to run through all of self.genome which creates a list that is as long as the length of the genome, and the rest of the elements run in constant time 
+
+***insert_te***
+insert_te's complexity is O(n), because in the worst run time case scenario the operation has to run disable_te through the whole length of the genome, which runs in O(n), and the rest of compenents of the operation are not as complex as that and dont make it bigger. 
+
+***copy_te***
+Similarly to insert_te, copy_te's complexity is determined by insert_te, as it is the most compuationally challenging portion of the operation and it has a complexity of O(n), so that is the complexity of copy_te. 
+***disable_te***
+disable_te's comlexity is O(n), because its complexity is governed by the while loop that starts at index 0 (the beginning of the genome), and at worst case would run through the whole genome if the length of the te was the size of the whole genome, because the te could never be bigger than the genome as it is a part of it. 
+
+***active_tes***
+active_tes's complexity is O(a), because it has to run through every element in the dictionary that is size a, the number of active transcriptional elements. 
+
+***__len__***
+len for the DLL takes O(n) because it has to go through the while loop for every element in the genome to add it to the length variable. 
+
+***__str__***
+str has a complexity of O(n^2) because every time a new element of the genome is added to the string, it has to run through every element of the genome that has already been added to the string before the current element that is being added due to the += componenet. 
 
 
 In `src/simulate.py` you will find a program that can run simulations and tell you actual time it takes to simulate with different implementations. You can use it to test your analysis. You can modify the parameters to the simulator if you want to explore how they affect the running time.
